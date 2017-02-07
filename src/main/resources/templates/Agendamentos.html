@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"></meta>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"></meta>
+<title>Agendamentos</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+</head>
+<body>
+	<div class="container">
+		<head>
+<ul class="nav nav-tabs">
+	<li class="active" role="presentation"><a th:href="@{/}">Agendamentos</a></li>
+	<li role="presentation"><a th:href="@{/novo}">Novo</a></li>
+</ul>
+		</head>
+		<div class="alert alert-success alert-dismissible" role="alert"
+			style="margin-top: 1%;" th:if="${mensagem} != null">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<p th:text="${mensagem}" class="js-mensagem">Salvo</p>
+		</div>
+		<div style="margin-top: 25px;">
+			<table class="table table-stripted">
+				<thead>
+					<tr>
+						<th width="350">Nome</th>
+						<th width="350">Endereço</th>
+						<th>Observação</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="agendamentos : ${agendamentos}">
+						<td th:text="${agendamentos.nome}"></td>
+						<td th:text="${agendamentos.endereco}"></td>
+						<td th:text="${agendamentos.observacao}"></td>
+						<td><a th:href="@{/concluido/{id}(id = ${agendamentos.id})}"
+							class="glyphicon glyphicon-ok"></a></td>
+					</tr>
+					<tr th:if="${agendamentos.isEmpty()}">
+						<td>Não há nenhum agendamento pendente.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+</body>
+</html>
